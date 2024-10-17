@@ -93,7 +93,7 @@ export const updateSuperAdminData = async(req, res) => {
             },
             data: {
                 email: email || undefined,
-                password: hashedPassword || undefined  // Use the hashed password
+                password: hashedPassword || undefined  
             }
         });
 

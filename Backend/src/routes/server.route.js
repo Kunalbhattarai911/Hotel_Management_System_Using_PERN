@@ -2,6 +2,7 @@ import express from "express";
 import authRoute from "./auth.route.js";
 import updateStatusAdmin from "./admin.status.route.js";
 import superAdminRoute from "./superAdmin.route.js";
+import adminRoute from "./admin.route.js";
 
 const serverRoute = express.Router()
 
@@ -13,5 +14,8 @@ serverRoute.use("/", updateStatusAdmin)
 
 //superAdmin Routes
 serverRoute.use("/superAdmin", superAdminRoute)
+
+//admin Route
+serverRoute.use("/admin", adminRoute)
 
 export default serverRoute;
