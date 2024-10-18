@@ -31,16 +31,59 @@ enum Status {
 }
 
 model Admin {
-  id          String     @id @default(uuid())
+  id          String   @id @default(uuid())
   firstName   String
   middleName  String?
   lastName    String
-  email       String     @unique
+  email       String   @unique
   password    String
   location    String
   age         Int
   phoneNumber String
-  status      Status     @default(Pending)
-  CreatedAt   DateTime   @default(now())
-  UpdatedAt   DateTime   @updatedAt
+  status      Status   @default(Pending)
+  CreatedAt   DateTime @default(now())
+  UpdatedAt   DateTime @updatedAt
+
+  Hotel Hotel[]
+}
+
+model User {
+  id          String @id @default(uuid())
+  fullName    String
+  email       String
+  password    String
+  location    String
+  phoneNumber String
+}
+
+model Hotel {
+  id        String   @id @default(uuid())
+  name      String
+  location  String
+  rating    Float?
+  admin     Admin    @relation(fields: [adminId], references: [id])
+  adminId   String
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+
+  Room Room[]
+}
+
+enum BedType {
+  Single
+  Double
+  Queen
+  King
+  Twin
+}
+
+model Room {
+  id            String   @id @default(uuid())
+  roomNumber    String   @unique
+  bedType       BedType
+  pricePerNight Float
+  hotelId       String
+  hotel         Hotel    @relation(fields: [hotelId], references: [id])
+  CreatedAt     DateTime @default(now())
+  UpdatedAt     DateTime @updatedAt
 }
