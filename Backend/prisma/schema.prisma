@@ -48,12 +48,14 @@ model Admin {
 }
 
 model User {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   fullName    String
-  email       String
+  email       String   @unique
   password    String
   location    String
   phoneNumber String
+  CreatedAt   DateTime @default(now())
+  UpdatedAt   DateTime @updatedAt
 }
 
 model Hotel {
