@@ -13,4 +13,5 @@ superAdminRoute.get("/info", isSuperAdminAuthenticated, superAdminData)
 //update SuperAdmin
 superAdminRoute.put("/update", isSuperAdminAuthenticated, updateSuperAdminData)
 
+
 export default superAdminRoute

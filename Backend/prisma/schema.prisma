@@ -56,19 +56,22 @@ model User {
   phoneNumber String
   CreatedAt   DateTime @default(now())
   UpdatedAt   DateTime @updatedAt
+
+  Rating Rating[]
 }
 
 model Hotel {
   id        String   @id @default(uuid())
   name      String
   location  String
-  rating    Float?
+  rating    Float?   @default(0)
   admin     Admin    @relation(fields: [adminId], references: [id])
   adminId   String
   CreatedAt DateTime @default(now())
   UpdatedAt DateTime @updatedAt
 
-  Room Room[]
+  Room   Room[]
+  Rating Rating[]
 }
 
 enum BedType {
@@ -88,4 +91,18 @@ model Room {
   hotel         Hotel    @relation(fields: [hotelId], references: [id])
   CreatedAt     DateTime @default(now())
   UpdatedAt     DateTime @updatedAt
+}
+
+model Rating {
+  id        String   @id @default(uuid())
+  rating    Float
+  comment   String?
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  hotel     Hotel    @relation(fields: [hotelId], references: [id])
+  hotelId   String
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+
+  @@unique([userId, hotelId])
 }

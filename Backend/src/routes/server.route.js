@@ -3,6 +3,7 @@ import authRoute from "./auth.route.js";
 import updateStatusAdmin from "./admin.status.route.js";
 import superAdminRoute from "./superAdmin.route.js";
 import adminRoute from "./admin.route.js";
+import hotelRoute from "./hotel.route.js";
 
 const serverRoute = express.Router()
 
@@ -17,5 +18,8 @@ serverRoute.use("/superAdmin", superAdminRoute)
 
 //admin Route
 serverRoute.use("/admin", adminRoute)
+
+//hotel Route
+serverRoute.use("/admin/hotel", hotelRoute)
 
 export default serverRoute;

@@ -115,3 +115,24 @@ export const updateSuperAdminData = async(req, res) => {
         });
     }
 };
+
+
+//Get All Hotel data By SuperAdmin
+export const getAllHotel = async(req,res) => {
+  try {
+    const getData = await prisma.hotel.findMany({})
+
+    return res.status(200).json({
+      message : "Hotel Data",
+      success : true,
+      Lists : getData
+    })
+  }  catch (error) {
+    console.error("Error Retriving Hotel", error);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+      error: error.message,
+    });
+  }
+};
