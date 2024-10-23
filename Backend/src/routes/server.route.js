@@ -6,6 +6,7 @@ import adminRoute from "./admin.route.js";
 import hotelRoute from "./hotel.route.js";
 import roomRoute from "./room.route.js";
 import ratingRoute from "./rating.route.js";
+import bookingRoute from "./Booking.route.js";
 
 const serverRoute = express.Router()
 
@@ -29,5 +30,8 @@ serverRoute.use("/hotel/room", roomRoute)
 
 //rating route
 serverRoute.use("/hotel/rating", ratingRoute)
+
+//booking route
+serverRoute.use("/hotel/booking", bookingRoute)
 
 export default serverRoute;

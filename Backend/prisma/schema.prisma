@@ -126,7 +126,7 @@ model Booking {
   hotel         Hotel         @relation(fields: [hotelId], references: [id])
   hotelId       String
   checkIn       DateTime
-  checkOut      DateTime?
+  checkOut      DateTime
   totalCost     Float
   bookingStatus bookingStatus @default(Pending)
   createdAt     DateTime      @default(now())
