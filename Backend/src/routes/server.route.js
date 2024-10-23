@@ -4,6 +4,7 @@ import updateStatusAdmin from "./admin.status.route.js";
 import superAdminRoute from "./superAdmin.route.js";
 import adminRoute from "./admin.route.js";
 import hotelRoute from "./hotel.route.js";
+import roomRoute from "./room.route.js";
 
 const serverRoute = express.Router()
 
@@ -21,5 +22,8 @@ serverRoute.use("/admin", adminRoute)
 
 //hotel Route
 serverRoute.use("/admin/hotel", hotelRoute)
+
+//room route
+serverRoute.use("/hotel/room", roomRoute)
 
 export default serverRoute;
