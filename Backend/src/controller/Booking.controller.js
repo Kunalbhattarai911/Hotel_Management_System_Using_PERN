@@ -90,3 +90,77 @@ export const bookingHotel = async (req, res) => {
       });
     }
   };
+
+  //update booking status
+  export const updateBookingStatusByAdmin = async(req,res) => {
+    try {
+        const adminId = req.admin.id
+        const bookingId = req.params.id
+        const {bookingStatus} = req.body
+
+        //find admin
+        const findAdmin = await prisma.admin.findUnique({
+            where : {
+                id : String(adminId)
+            }
+        })
+
+        if(!findAdmin) {
+            return res.status(404).json({
+                message : "Admin Not Found",
+                success : false
+            })
+        }
+
+        //find booking 
+        const findBooking = await prisma.booking.findUnique({
+            where : {
+                id : String(bookingId)
+            }
+        })
+
+        if(!findBooking) {
+            return res.status(404).json({
+                message : "Booking Not found",
+                success : false
+            })
+        }
+
+        //find if already booked
+        if(findBooking.bookingStatus === "Confirmed"){
+            return res.status(200).json ({
+                message : "Booking already confirmed",
+                success : true
+            })
+        }
+
+        if(findBooking.bookingStatus === "Cancelled"){
+            return res.status(200).json ({
+                message : "Booking already cancelled",
+                success : true
+            })
+        }
+
+        //update booking status
+        const updateBookingStatus = await prisma.booking.update({
+            where : {
+                id : String(bookingId)
+            },
+            data : {
+                bookingStatus: bookingStatus || undefined
+            }
+        })
+        return res.status(200).json({
+            message: "Booking status updated successfully.",
+            success: true,
+            booking: updateBookingStatus,
+          });
+        } catch (error) {
+          console.error("Error updating booking status:", error);
+          return res.status(500).json({
+            message: "An error occurred while updating the booking status.",
+            success: false,
+            error: error.message,
+          });
+        }
+      };

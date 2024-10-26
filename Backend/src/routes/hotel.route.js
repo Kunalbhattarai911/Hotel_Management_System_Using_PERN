@@ -18,4 +18,5 @@ hotelRoute.put("/update/:id", isAdminAuthenticated, updateHotelInfo)
 
 //delete hotel
 hotelRoute.delete("/delete/:id", isAdminAuthenticated, deleteHotel)
+
 export default hotelRoute;
